@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Quality Tools for Snowflake - Comparison Report</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+```
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+    
+    .header {
+        background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+    }
+    
+    .header h1 {
+        margin: 0 0 10px 0;
+        font-size: 2.5em;
+        font-weight: 300;
+    }
+    
+    .header p {
+        margin: 0;
+        font-size: 1.2em;
+        opacity: 0.9;
+    }
+    
+    .content {
+        padding: 30px;
+    }
+    
+    .download-section {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 30px;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 10px;
+        border: 2px dashed #3498db;
+    }
+    
+    .download-btn {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        font-size: 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        margin: 10px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    }
+    
+    .download-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+    }
+    
+    .preview-section {
+        margin-top: 30px;
+    }
+    
+    .table-container {
+        overflow-x: auto;
+        margin: 20px 0;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        font-size: 14px;
+    }
+    
+    th {
+        background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+        color: white;
+        padding: 15px 10px;
+        text-align: left;
+        font-weight: 600;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+    
+    td {
+        padding: 12px 10px;
+        border-bottom: 1px solid #eee;
+        vertical-align: top;
+        line-height: 1.4;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+    
+    tr:hover {
+        background-color: #e3f2fd;
+        transition: background-color 0.2s ease;
+    }
+    
+    .tool-name {
+        font-weight: bold;
+        color: #2c3e50;
+        font-size: 16px;
+    }
+    
+    .pros {
+        color: #28a745;
+    }
+    
+    .cons {
+        color: #dc3545;
+    }
+    
+    .rating {
+        font-weight: bold;
+    }
+    
+    .excellent { color: #28a745; }
+    .good { color: #ffc107; }
+    .basic { color: #fd7e14; }
+    
+    .stars {
+        color: #ffd700;
+        font-weight: bold;
+    }
+    
+    .section-title {
+        background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        color: white;
+        padding: 15px;
+        margin: 30px 0 0 0;
+        font-size: 20px;
+        font-weight: 600;
+        border-radius: 8px;
+    }
+    
+    .note {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        border-left: 4px solid #2196f3;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 0 8px 8px 0;
+    }
+    
+    .code-example {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        padding: 15px;
+        margin: 15px 0;
+        font-family: 'Courier New', monospace;
+        font-size: 12px;
+        overflow-x: auto;
+    }
+</style>
+```
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Data Quality Tools for Snowflake</h1>
+            <p>Comprehensive Comparison Report - Ready-Made Solutions & Programming Libraries</p>
+        </div>
+
+```
+    <div class="content">
+        <div class="download-section">
+            <h2>📥 Download Report</h2>
+            <p>Click the button below to download the complete comparison as an Excel file</p>
+            <button class="download-btn" onclick="downloadExcel()">
+                📄 Download Excel Report
+            </button>
+            <br>
+            <small>Compatible with Excel, Google Sheets, and all spreadsheet applications</small>
+        </div>
+        
+        <div class="note">
+            <strong>Report Summary:</strong> This analysis covers the top 3-4 open-source data quality tools that can run as standalone Kubernetes pods, integrate with Snowflake data, and provide rule-based validation with results. Both ready-made solutions and programming libraries are included.
+        </div>
+        
+        <div class="preview-section">
+            <div class="section-title">🛠️ Ready-Made Solutions</div>
+            <div class="table-container">
+                <table id="readyMadeTable">
+                    <thead>
+                        <tr>
+                            <th>Solution</th>
+                            <th>Usage & Description</th>
+                            <th>Pros</th>
+                            <th>Cons</th>
+                            <th>Docker/K8s</th>
+                            <th>Snowflake Integration</th>
+                            <th>Popularity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tool-name">Great Expectations</td>
+                            <td>Python-based framework using "Expectations" (unit tests for data). Translates tests into SQL queries executed on Snowflake. Uses Checkpoints for orchestrated validation runs.</td>
+                            <td class="pros">• Most mature and widely adopted tool<br>• Excellent Snowflake integration with official partnership<br>• Strong documentation and community<br>• Automatic documentation generation<br>• Enterprise support available</td>
+                            <td class="cons">• Python-centric (requires Python expertise)<br>• Can be complex for simple use cases<br>• Limited native Kubernetes orchestration</td>
+                            <td class="rating excellent">✅ Excellent<br>• Official Docker images<br>• Can run as containerized services<br>• GitHub Actions integration<br>• Supports cloud deployment</td>
+                            <td class="rating excellent">✅ Native<br>• Official Snowflake partnership<br>• Native SQL execution<br>• All authentication methods<br>• Connection: snowflake://user:pass@account/db/schema</td>
+                            <td class="stars">⭐ 9,800 GitHub stars<br>• 500+ contributors<br>• Very active community<br>• Strong commercial backing</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name">Soda Core</td>
+                            <td>Modern Python library using SodaCL (YAML-based) for data quality checks. Converts checks to SQL queries executed on Snowflake. Self-hosted agent for containerized environments.</td>
+                            <td class="pros">• Modern, cloud-native design<br>• Excellent Kubernetes integration<br>• User-friendly YAML syntax<br>• Strong Snowflake support<br>• Good balance of simplicity and power</td>
+                            <td class="cons">• Newer tool with smaller community than GX<br>• Some advanced features require Soda Cloud<br>• Less extensive ecosystem</td>
+                            <td class="rating excellent">✅ Excellent<br>• Official Docker images<br>• Self-hosted Soda Agent for K8s<br>• Helm charts available<br>• Built for containerized environments</td>
+                            <td class="rating excellent">✅ Native<br>• Native Snowflake connector<br>• Direct SQL execution<br>• Multiple authentication methods<br>• Real-time monitoring capabilities</td>
+                            <td class="stars">⭐ 2,800 GitHub stars<br>• Growing community<br>• Commercial backing<br>• 100+ contributors</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name">MobyDQ</td>
+                            <td>Ubisoft-developed tool for automated data quality checks. Uses GraphQL API and web-based interface. Docker-compose based deployment with PostgreSQL backend.</td>
+                            <td class="pros">• Fully containerized design<br>• Web-based interface<br>• GraphQL API<br>• Complete Docker solution</td>
+                            <td class="cons">• Smaller community<br>• Less active development<br>• Limited advanced features<br>• Fewer integrations</td>
+                            <td class="rating good">✅ Good<br>• Fully containerized with Docker Compose<br>• All components as Docker containers<br>• Limited K8s examples available</td>
+                            <td class="rating basic">✅ Basic<br>• Listed as supported data source<br>• Uses standard database connectors</td>
+                            <td class="stars">⭐ 500+ GitHub stars<br>• Ubisoft-backed<br>• Smaller but stable community</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="section-title">💻 Programming Libraries</div>
+            <div class="table-container">
+                <table id="librariesTable">
+                    <thead>
+                        <tr>
+                            <th>Library</th>
+                            <th>Language</th>
+                            <th>Usage & Description</th>
+                            <th>Pros</th>
+                            <th>Cons</th>
+                            <th>Docker/K8s</th>
+                            <th>Snowflake Integration</th>
+                            <th>Popularity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="tool-name">Pandera</td>
+                            <td>Python</td>
+                            <td>Framework for precision data testing with statistical typing capabilities. Define schemas once and validate multiple dataframe types. Supports Ibis backend for direct Snowflake validation.</td>
+                            <td class="pros">• Excellent documentation and features<br>• Statistical validation beyond basic checks<br>• Multiple dataframe backend support<br>• Type-safe programming<br>• Easy containerization</td>
+                            <td class="cons">• Can add runtime overhead<br>• Learning curve for advanced features<br>• Primarily pandas-focused</td>
+                            <td class="rating excellent">✅ Excellent<br>• Pure Python implementation<br>• Easy containerization<br>• Microservice architecture ready</td>
+                            <td class="rating excellent">✅ Excellent<br>• Direct via Ibis backend<br>• Via snowflake-connector-python<br>• pandas-on-Snowflake support</td>
+                            <td class="stars">⭐ 3,200 GitHub stars<br>• Union.ai backing<br>• 50+ contributors<br>• Very active development</td>
+                        </tr>
+                        <tr>
+                            <td class="tool-name">go-playground/validator</td>
+                            <td>Go</td>
+                            <td>Comprehensive struct and field validation using struct tags. Cross-field validation, built-in validators, custom functions support. Default validator for Gin framework.</td>
+                            <td class="pros">• High performance and lightweight<br>• Extensive built-in validators<br>• Excellent documentation<br>• Thread-safe design<br>• No external dependencies</td>
+                            <td class="cons">• Struct tag approach can be unwieldy<br>• Less flexible for complex business logic</td>
+                            <td class="rating excellent">✅ Excellent<br>• Lightweight, single binary<br>• Perfect for microservices<br>• Thread-safe for containers</td>
+                            <td class="rating good">✅ Good<br>• Works with gosnowflake driver<br>• Validates data structures<br>• Supports sql.Valuer interface</td>
+                            <td class="stars">⭐ 18,900 GitHub stars<br>• Extremely popular<br>• Very active maintenance<br>• Large Go community adoption</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="section-title">🚀 Implementation Examples</div>
+            
+            <h4>Great Expectations with Snowflake:</h4>
+            <div class="code-example">
+```
+
+from great_expectations import DataContext
+context = DataContext()
+validator = context.get_validator(
+batch_request=BatchRequest(datasource_name=“snowflake_db”),
+expectation_suite_name=“data_quality_suite”
+)
+validator.expect_column_values_to_not_be_null(“user_id”)
+validator.expect_column_values_to_be_unique(“customer_id”)
+</div>
+
+```
+            <h4>Soda Core with Snowflake:</h4>
+            <div class="code-example">
+```
+
+checks for customer_data:
+
+- row_count between 1000 and 5000
+- missing_count(email) = 0
+- duplicate_count(customer_id) = 0
+- freshness(created_date) < 1d
+  </div>
+  
+  ```
+          <h4>Pandera with Snowflake:</h4>
+          <div class="code-example">
+  ```
+
+import pandera.pandas as pa
+import snowflake.connector
+
+class SalesSchema(pa.DataFrameModel):
+transaction_id: int = pa.Field(ge=0, unique=True)
+amount: float = pa.Field(ge=0, le=100000)
+customer_id: str = pa.Field(regex=r’^CUST_\d+$’)
+
+conn = snowflake.connector.connect(…)
+df = pd.read_sql(“SELECT * FROM sales_data”, conn)
+validated_df = SalesSchema.validate(df, lazy=True)
+</div>
+
+```
+            <h4>Go Validator with Snowflake:</h4>
+            <div class="code-example">
+```
+
+type SnowflakeData struct {
+ID       int64  `validate:"required,min=1"`
+Email    string `validate:"required,email"`
+Status   string `validate:"oneof=active inactive"`
+}
+
+db, err := sql.Open(“snowflake”, “user:password@account/database”)
+// Fetch and validate data
+</div>
+
+```
+            <div class="note">
+                <strong>Recommendations:</strong>
+                <ul>
+                    <li><strong>For immediate implementation:</strong> Great Expectations offers the best balance of maturity, Snowflake integration, and community support.</li>
+                    <li><strong>For cloud-native environments:</strong> Soda Core provides the most modern Kubernetes-first approach with excellent Snowflake connectivity.</li>
+                    <li><strong>For custom Python development:</strong> Pandera enables powerful custom data quality applications with statistical validation capabilities.</li>
+                    <li><strong>For Go-based services:</strong> go-playground/validator combined with the official gosnowflake driver provides high-performance validation in containerized environments.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function downloadExcel() {
+        // Create a new workbook
+        const wb = XLSX.utils.book_new();
+        
+        // Ready-Made Solutions data
+        const readyMadeData = [
+            ['Solution', 'Usage & Description', 'Pros', 'Cons', 'Docker/K8s Capability', 'Snowflake Integration', 'Popularity'],
+            [
+                'Great Expectations',
+                'Python-based framework using "Expectations" (unit tests for data). Translates tests into SQL queries executed on Snowflake. Uses Checkpoints for orchestrated validation runs.',
+                '• Most mature and widely adopted tool\n• Excellent Snowflake integration with official partnership\n• Strong documentation and community\n• Automatic documentation generation\n• Enterprise support available',
+                '• Python-centric (requires Python expertise)\n• Can be complex for simple use cases\n• Limited native Kubernetes orchestration',
+                '✅ Excellent\n• Official Docker images\n• Can run as containerized services\n• GitHub Actions integration\n• Supports cloud deployment',
+                '✅ Native\n• Official Snowflake partnership\n• Native SQL execution\n• All authentication methods\n• Connection: snowflake://user:pass@account/db/schema',
+                '⭐ 9,800 GitHub stars\n• 500+ contributors\n• Very active community\n• Strong commercial backing'
+            ],
+            [
+                'Soda Core',
+                'Modern Python library using SodaCL (YAML-based) for data quality checks. Converts checks to SQL queries executed on Snowflake. Self-hosted agent for containerized environments.',
+                '• Modern, cloud-native design\n• Excellent Kubernetes integration\n• User-friendly YAML syntax\n• Strong Snowflake support\n• Good balance of simplicity and power',
+                '• Newer tool with smaller community than GX\n• Some advanced features require Soda Cloud\n• Less extensive ecosystem',
+                '✅ Excellent\n• Official Docker images\n• Self-hosted Soda Agent for K8s\n• Helm charts available\n• Built for containerized environments',
+                '✅ Native\n• Native Snowflake connector\n• Direct SQL execution\n• Multiple authentication methods\n• Real-time monitoring capabilities',
+                '⭐ 2,800 GitHub stars\n• Growing community\n• Commercial backing\n• 100+ contributors'
+            ],
+            [
+                'MobyDQ',
+                'Ubisoft-developed tool for automated data quality checks. Uses GraphQL API and web-based interface. Docker-compose based deployment with PostgreSQL backend.',
+                '• Fully containerized design\n• Web-based interface\n• GraphQL API\n• Complete Docker solution',
+                '• Smaller community\n• Less active development\n• Limited advanced features\n• Fewer integrations',
+                '✅ Good\n• Fully containerized with Docker Compose\n• All components as Docker containers\n• Limited K8s examples available',
+                '✅ Basic\n• Listed as supported data source\n• Uses standard database connectors',
+                '⭐ 500+ GitHub stars\n• Ubisoft-backed\n• Smaller but stable community'
+            ]
+        ];
+        
+        // Programming Libraries data
+        const librariesData = [
+            ['Library', 'Language', 'Usage & Description', 'Pros', 'Cons', 'Docker/K8s Capability', 'Snowflake Integration', 'Popularity'],
+            [
+                'Pandera',
+                'Python',
+                'Framework for precision data testing with statistical typing capabilities. Define schemas once and validate multiple dataframe types. Supports Ibis backend for direct Snowflake validation.',
+                '• Excellent documentation and features\n• Statistical validation beyond basic checks\n• Multiple dataframe backend support\n• Type-safe programming\n• Easy containerization',
+                '• Can add runtime overhead\n• Learning curve for advanced features\n• Primarily pandas-focused',
+                '✅ Excellent\n• Pure Python implementation\n• Easy containerization\n• Microservice architecture ready',
+                '✅ Excellent\n• Direct via Ibis backend\n• Via snowflake-connector-python\n• pandas-on-Snowflake support',
+                '⭐ 3,200 GitHub stars\n• Union.ai backing\n• 50+ contributors\n• Very active development'
+            ],
+            [
+                'go-playground/validator',
+                'Go',
+                'Comprehensive struct and field validation using struct tags. Cross-field validation, built-in validators, custom functions support. Default validator for Gin framework.',
+                '• High performance and lightweight\n• Extensive built-in validators\n• Excellent documentation\n• Thread-safe design\n• No external dependencies',
+                '• Struct tag approach can be unwieldy\n• Less flexible for complex business logic',
+                '✅ Excellent\n• Lightweight, single binary\n• Perfect for microservices\n• Thread-safe for containers',
+                '✅ Good\n• Works with gosnowflake driver\n• Validates data structures\n• Supports sql.Valuer interface',
+                '⭐ 18,900 GitHub stars\n• Extremely popular\n• Very active maintenance\n• Large Go community adoption'
+            ]
+        ];
+        
+        // Examples data
+        const examplesData = [
+            ['Tool', 'Language', 'Example Code'],
+            [
+                'Great Expectations',
+                'Python',
+                'from great_expectations import DataContext\ncontext = DataContext()\nvalidator = context.get_validator(\n    batch_request=BatchRequest(datasource_name="snowflake_db"),\n    expectation_suite_name="data_quality_suite"\n)\nvalidator.expect_column_values_to_not_be_null("user_id")\nvalidator.expect_column_values_to_be_unique("customer_id")'
+            ],
+            [
+                'Soda Core',
+                'YAML',
+                'checks for customer_data:\n  - row_count between 1000 and 5000\n  - missing_count(email) = 0\n  - duplicate_count(customer_id) = 0\n  - freshness(created_date) < 1d'
+            ],
+            [
+                'Pandera',
+                'Python',
+                'import pandera.pandas as pa\nimport snowflake.connector\n\nclass SalesSchema(pa.DataFrameModel):\n    transaction_id: int = pa.Field(ge=0, unique=True)\n    amount: float = pa.Field(ge=0, le=100000)\n    customer_id: str = pa.Field(regex=r"^CUST_\\d+$")\n\nconn = snowflake.connector.connect(...)\ndf = pd.read_sql("SELECT * FROM sales_data", conn)\nvalidated_df = SalesSchema.validate(df, lazy=True)'
+            ],
+            [
+                'Go Validator',
+                'Go',
+                'type SnowflakeData struct {\n    ID       int64  `validate:"required,min=1"`\n    Email    string `validate:"required,email"`\n    Status   string `validate:"oneof=active inactive"`\n}\n\ndb, err := sql.Open("snowflake", "user:password@account/database")\n// Fetch and validate data'
+            ]
+        ];
+        
+        // Recommendations data
+        const recommendationsData = [
+            ['Use Case', 'Recommended Tool', 'Reason'],
+            ['Immediate Implementation', 'Great Expectations', 'Best balance of maturity, Snowflake integration, and community support'],
+            ['Cloud-Native Environments', 'Soda Core', 'Most modern Kubernetes-first approach with excellent Snowflake connectivity'],
+            ['Custom Python Development', 'Pandera', 'Powerful custom data quality applications with statistical validation capabilities'],
+            ['Go-based Services', 'go-playground/validator', 'High-performance validation in containerized environments with gosnowflake driver']
+        ];
+        
+        // Create worksheets
+        const ws1 = XLSX.utils.aoa_to_sheet(readyMadeData);
+        const ws2 = XLSX.utils.aoa_to_sheet(librariesData);
+        const ws3 = XLSX.utils.aoa_to_sheet(examplesData);
+        const ws4 = XLSX.utils.aoa_to_sheet(recommendationsData);
+        
+        // Set column widths
+        const wscols = [
+            {wch: 20}, // Solution
+            {wch: 50}, // Usage
+            {wch: 40}, // Pros
+            {wch: 40}, // Cons
+            {wch: 30}, // Docker/K8s
+            {wch: 30}, // Snowflake
+            {wch: 25}  // Popularity
+        ];
+        
+        ws1['!cols'] = wscols;
+        ws2['!cols'] = wscols;
+        ws3['!cols'] = [{wch: 20}, {wch: 15}, {wch: 80}];
+        ws4['!cols'] = [{wch: 25}, {wch: 25}, {wch: 60}];
+        
+        // Add worksheets to workbook
+        XLSX.utils.book_append_sheet(wb, ws1, 'Ready-Made Solutions');
+        XLSX.utils.book_append_sheet(wb, ws2, 'Programming Libraries');
+        XLSX.utils.book_append_sheet(wb, ws3, 'Implementation Examples');
+        XLSX.utils.book_append_sheet(wb, ws4, 'Recommendations');
+        
+        // Save the file
+        XLSX.writeFile(wb, 'Data_Quality_Tools_Snowflake_Comparison.xlsx');
+    }
+</script>
+```
+
+</body>
+</html>
